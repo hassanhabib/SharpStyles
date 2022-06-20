@@ -895,7 +895,6 @@ namespace SharpStyles.Models
                         }
                     }
 
-                    stringBuilder.AppendLine();
                     stringBuilder.Append("}");
                     stringBuilder.AppendLine();
                 }
