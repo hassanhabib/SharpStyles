@@ -888,7 +888,7 @@ namespace SharpStyles.Models
                         {
                             if (innerProperty.GetValue(propertyValue) != null)
                             {
-                                string rawValue = $"{innerProperty.Name}: {innerProperty.GetValue(propertyValue)};";
+                                string rawValue = $"\t{innerProperty.Name}: {innerProperty.GetValue(propertyValue)};";
                                 stringBuilder.Append(reg.Replace(rawValue, "$1-").ToLower());
                                 stringBuilder.AppendLine();
                             }
