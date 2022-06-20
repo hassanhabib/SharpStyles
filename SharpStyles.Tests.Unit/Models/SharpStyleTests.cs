@@ -47,22 +47,18 @@ namespace SharpStyles.Tests.Unit.Models
 
 my-element {{
 background-color: {randomValue};
-
 }}
 
 #my-id {{
 background-color: {randomValue};
-
 }}
 
 .my-class {{
 background-color: {randomValue};
-
 }}
 
 ::deep my-deep {{
 background-color: {randomValue};
-
 }}
 ";
 
