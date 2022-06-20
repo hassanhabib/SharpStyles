@@ -5,6 +5,10 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Reflection;
+using System.Text;
+using System.Text.RegularExpressions;
+using SharpStyles.Models.Attributes;
 
 namespace SharpStyles.Models
 {
@@ -847,7 +851,57 @@ namespace SharpStyles.Models
 
         public string ToCss()
         {
-            throw new NotImplementedException();
+            var reg = new Regex("([a-z,0-9](?=[A-Z])|[A-Z](?=[A-Z][a-z]))");
+
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine();
+            PropertyInfo[] properties = this.GetType().GetProperties();
+
+            foreach (PropertyInfo property in properties)
+            {
+                if (property.PropertyType.IsEquivalentTo(typeof(SharpStyle)))
+                {
+                    string prefix = null;
+
+                    foreach (var attribute in property.CustomAttributes)
+                    {
+                        prefix += attribute.AttributeType.Name switch
+                        {
+                            nameof(CssId) => "#",
+                            nameof(CssClass) => ".",
+                            nameof(CssDeep) => "::deep ",
+                            _ => ""
+                        };
+                    }
+
+                    string selectorCss = reg.Replace(property.Name, "$1-").ToLower();
+                    stringBuilder.AppendLine();
+                    stringBuilder.Append($"{prefix}{selectorCss} {{");
+                    stringBuilder.AppendLine();
+
+                    PropertyInfo[] innerProperties = property.PropertyType.GetProperties();
+                    var propertyValue = property.GetValue(this);
+
+                    if (propertyValue != null)
+                    {
+                        foreach (PropertyInfo innerProperty in innerProperties)
+                        {
+                            if (innerProperty.GetValue(propertyValue) != null)
+                            {
+                                string rawValue = $"{innerProperty.Name}: {innerProperty.GetValue(propertyValue)};";
+                                stringBuilder.Append(reg.Replace(rawValue, "$1-").ToLower());
+                                stringBuilder.AppendLine();
+                            }
+                        }
+                    }
+
+                    stringBuilder.AppendLine();
+                    stringBuilder.Append("}");
+                    stringBuilder.AppendLine();
+                }
+            }
+
+            return stringBuilder.ToString();
         }
     }
 }
