@@ -46,19 +46,19 @@ namespace SharpStyles.Tests.Unit.Models
             string expectedStyle = @$"
 
 my-element {{
-background-color: {randomValue};
+    background-color: {randomValue};
 }}
 
 #my-id {{
-background-color: {randomValue};
+    background-color: {randomValue};
 }}
 
 .my-class {{
-background-color: {randomValue};
+    background-color: {randomValue};
 }}
 
 ::deep my-deep {{
-background-color: {randomValue};
+    background-color: {randomValue};
 }}
 ";
 
