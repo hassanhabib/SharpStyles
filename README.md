@@ -69,7 +69,18 @@ td {
 	color: "white";
 }
 
-#submitButton {
+#submit-button {
 	width: "12px";
 }
 ``
+
+<br />
+
+If you have any suggestions, comments or questions, please feel free to contact me on:
+<br />
+Twitter: @hassanrezkhabib
+<br />
+LinkedIn: hassanrezkhabib
+<br />
+E-Mail: hassanhabib@live.com
+<br />
