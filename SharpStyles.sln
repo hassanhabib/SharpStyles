@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpStyles", "SharpStyles\SharpStyles.csproj", "{C6C873B5-44B3-4C79-81BB-D05C2A828EB6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpStyles.Tests.Unit", "SharpStyles.Tests.Unit\SharpStyles.Tests.Unit.csproj", "{D19B362E-2180-4027-A4A2-CEDC5926462F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C6C873B5-44B3-4C79-81BB-D05C2A828EB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6C873B5-44B3-4C79-81BB-D05C2A828EB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6C873B5-44B3-4C79-81BB-D05C2A828EB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D19B362E-2180-4027-A4A2-CEDC5926462F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D19B362E-2180-4027-A4A2-CEDC5926462F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D19B362E-2180-4027-A4A2-CEDC5926462F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D19B362E-2180-4027-A4A2-CEDC5926462F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
