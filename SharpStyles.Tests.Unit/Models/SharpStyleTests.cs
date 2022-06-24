@@ -69,6 +69,61 @@ my-element {{
             actualStyle.Should().BeEquivalentTo(expectedStyle);
         }
 
+        [Fact]
+        public void ShouldSerializeWithCustomSelectors()
+        {
+            // given
+            string randomValue = GetRandomString();
+
+            var testStyle = new TestStyleWithCustomSelectors
+            {
+                MyElement = new SharpStyle
+                {
+                    BackgroundColor = randomValue
+                },
+
+                MyId = new SharpStyle
+                {
+                    BackgroundColor = randomValue
+                },
+
+                MyClass = new SharpStyle
+                {
+                    BackgroundColor = randomValue
+                },
+
+                MyDeep = new SharpStyle
+                {
+                    BackgroundColor = randomValue
+                }
+            };
+
+            string expectedStyle = @$"
+
+my-custom-element {{
+	background-color: {randomValue};
+}}
+
+#my-custom-id {{
+	background-color: {randomValue};
+}}
+
+.my-custom-class {{
+	background-color: {randomValue};
+}}
+
+::my-custom-deep {{
+	background-color: {randomValue};
+}}
+";
+
+            // when
+            string actualStyle = testStyle.ToCss();
+
+            // then
+            actualStyle.Should().BeEquivalentTo(expectedStyle);
+        }
+
         internal class TestStyle : SharpStyle
         {
             [CssElement]
@@ -81,6 +136,21 @@ my-element {{
             public SharpStyle MyClass { get; set; }
 
             [CssDeep]
+            public SharpStyle MyDeep { get; set; }
+        }
+
+        internal class TestStyleWithCustomSelectors : SharpStyle
+        {
+            [CssElement(selector = "my-custom-element")]
+            public SharpStyle MyElement { get; set; }
+
+            [CssId(selector = "#my-custom-id")]
+            public SharpStyle MyId { get; set; }
+
+            [CssClass(selector = ".my-custom-class")]
+            public SharpStyle MyClass { get; set; }
+
+            [CssDeep(selector = "::my-custom-deep")]
             public SharpStyle MyDeep { get; set; }
         }
 

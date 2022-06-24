@@ -11,5 +11,6 @@ namespace SharpStyles.Models.Attributes
     [AttributeUsage(AttributeTargets.Property)]
     public class CssDeep : Attribute
     {
+        public string selector;
     }
 }

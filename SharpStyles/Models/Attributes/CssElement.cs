@@ -9,5 +9,8 @@ using System;
 namespace SharpStyles.Models.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class CssElement : Attribute { }
+    public class CssElement : Attribute
+    {
+        public string selector;
+    }
 }
