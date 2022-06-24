@@ -141,16 +141,16 @@ my-custom-element {{
 
         internal class TestStyleWithCustomSelectors : SharpStyle
         {
-            [CssElement(selector = "my-custom-element")]
+            [CssElement(Selector = "my-custom-element")]
             public SharpStyle MyElement { get; set; }
 
-            [CssId(selector = "#my-custom-id")]
+            [CssId(Selector = "#my-custom-id")]
             public SharpStyle MyId { get; set; }
 
-            [CssClass(selector = ".my-custom-class")]
+            [CssClass(Selector = ".my-custom-class")]
             public SharpStyle MyClass { get; set; }
 
-            [CssDeep(selector = "::my-custom-deep")]
+            [CssDeep(Selector = "::my-custom-deep")]
             public SharpStyle MyDeep { get; set; }
         }
 

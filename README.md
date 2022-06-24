@@ -74,10 +74,42 @@ td {
 }
 ```
 
+You can also customize your selectors as follows:
+
+```csharp
+public class MyComponentStyle: SharpStyle
+{
+	[CssElement(Selector="my-custom-td")]
+	public SharpStyle Td {get; set;}
+	
+	[CssClass(Selector=".my-custom-primary-button")]
+	public SharpStyle PrimaryButton {get; set;}
+
+	[CssId(Selector="#my-custom-submit-button")]
+	public SharpStyle SubmitButton {get; set;}
+}
+```
+
+which will produce the following CSS:
+```css
+my-custom-td {
+	background-color: "red";
+}
+
+.my-custom-primary-button {
+	background-color: "blue";
+	color: "white";
+}
+
+#my-custom-submit-button {
+	width: "12px";
+}
+```
+
+
 here's a video introduction to this library:
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/06chSzVeuls/0.jpg)](https://www.youtube.com/watch?v=06chSzVeuls)
-
 
 <br />
 
