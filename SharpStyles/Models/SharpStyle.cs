@@ -5,6 +5,7 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -862,23 +863,39 @@ namespace SharpStyles.Models
                 if (property.PropertyType.IsEquivalentTo(typeof(SharpStyle)))
                 {
                     string prefix = null;
+                    string selectorCss = null;
 
                     foreach (var attribute in property.CustomAttributes)
                     {
-                        prefix += attribute.AttributeType.Name switch
+                        if (attribute.NamedArguments.Any())
                         {
-                            nameof(CssId) => "#",
-                            nameof(CssClass) => ".",
-                            nameof(CssDeep) => "::deep ",
-                            _ => ""
-                        };
+                            selectorCss = attribute.NamedArguments[0].TypedValue.Value.ToString();
+                        }
+                        else
+                        {
+                            prefix += attribute.AttributeType.Name switch
+                            {
+                                nameof(CssId) => "#",
+                                nameof(CssClass) => ".",
+                                nameof(CssDeep) => "::deep ",
+                                _ => ""
+                            };
+                        }
                     }
 
-                    string selectorCss = reg.Replace(property.Name, "$1-").ToLower();
-                    stringBuilder.AppendLine();
-                    stringBuilder.Append($"{prefix}{selectorCss} {{");
-                    stringBuilder.AppendLine();
+                    if (selectorCss is null)
+                    {
+                        selectorCss = reg.Replace(property.Name, "$1-").ToLower();
+                        stringBuilder.AppendLine();
+                        stringBuilder.Append($"{prefix}{selectorCss} {{");
+                    }
+                    else
+                    {
+                        stringBuilder.AppendLine();
+                        stringBuilder.Append($"{selectorCss} {{");
+                    }
 
+                    stringBuilder.AppendLine();
                     PropertyInfo[] innerProperties = property.PropertyType.GetProperties();
                     var propertyValue = property.GetValue(this);
 
