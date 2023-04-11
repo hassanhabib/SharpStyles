@@ -9,7 +9,7 @@ using System;
 namespace SharpStyles.Models.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class CssClass : Attribute 
+    public class CssClass : Attribute
     {
         public string Selector;
     }
