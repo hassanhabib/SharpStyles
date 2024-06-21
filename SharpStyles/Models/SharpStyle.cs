@@ -142,7 +142,7 @@ namespace SharpStyles.Models
         /// <summary>
         /// Defines the shape of the bottom-left border corner of an element.
         /// </summary>
-        public string BorderBottomleftRadius { get; set; }
+        public string BorderBottomLeftRadius { get; set; }
 
         /// <summary>
         /// Defines the shape of the bottom-right border corner of an element.
