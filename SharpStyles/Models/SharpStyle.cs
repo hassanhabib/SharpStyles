@@ -267,7 +267,7 @@ namespace SharpStyles.Models
         /// <summary>
         /// Defines the shape of the top-left border corner of an element.
         /// </summary>
-        public string BorderTopleftRadius { get; set; }
+        public string BorderTopLeftRadius { get; set; }
 
         /// <summary>
         /// Defines the shape of the top-right border corner of an element.
