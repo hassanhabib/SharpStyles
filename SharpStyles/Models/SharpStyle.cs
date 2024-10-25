@@ -700,6 +700,11 @@ namespace SharpStyles.Models
         public string Right { get; set; }
 
         /// <summary>
+        /// Specifies the stroke color for SVG elements.
+        /// </summary>
+        public string Stroke { get; set; }
+
+        /// <summary>
         /// Specifies the length of the tab character.
         /// </summary>
         public string TabSize { get; set; }
