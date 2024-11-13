@@ -854,6 +854,11 @@ namespace SharpStyles.Models
         /// </summary>
         public string ZIndex { get; set; }
 
+        /// <summary>
+        /// Specifies graphical effects to an element.
+        /// </summary>
+        public string Filter { get; set; }
+
         public string ToCss()
         {
             var reg = new Regex("([a-z,0-9](?=[A-Z])|[A-Z](?=[A-Z][a-z]))");
