@@ -859,6 +859,11 @@ namespace SharpStyles.Models
         /// </summary>
         public string Filter { get; set; }
 
+        /// <summary>
+        /// Specifies under what circumstances a particular element can be the target of mouse events.
+        /// </summary>
+        public string PointerEvents { get; set; }
+
         public string ToCss()
         {
             var reg = new Regex("([a-z,0-9](?=[A-Z])|[A-Z](?=[A-Z][a-z]))");
