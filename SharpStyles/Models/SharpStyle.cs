@@ -490,6 +490,11 @@ namespace SharpStyles.Models
         public string FontWeight { get; set; }
 
         /// <summary>
+        /// Specifies the gap between rows and columns in a flex or grid container.
+        /// </summary>
+        public string Gap { get; set; }
+
+        /// <summary>
         /// Specify the height of an element.
         /// </summary>
         public string Height { get; set; }
