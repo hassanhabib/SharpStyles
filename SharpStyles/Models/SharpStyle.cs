@@ -490,6 +490,11 @@ namespace SharpStyles.Models
         public string FontWeight { get; set; }
 
         /// <summary>
+        /// Specifies the gap between rows and columns in a flex or grid container.
+        /// </summary>
+        public string Gap { get; set; }
+
+        /// <summary>
         /// Specify the height of an element.
         /// </summary>
         public string Height { get; set; }
@@ -858,6 +863,11 @@ namespace SharpStyles.Models
         /// Specifies graphical effects to an element.
         /// </summary>
         public string Filter { get; set; }
+
+        /// <summary>
+        /// Specifies under what circumstances a particular element can be the target of mouse events.
+        /// </summary>
+        public string PointerEvents { get; set; }
 
         public string ToCss()
         {
