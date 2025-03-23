@@ -125,12 +125,12 @@ my-custom-element {{
         }
 
         [Fact]
-        public void ShouldSerializeMediaCssRules()
+        public void ShouldSerializeMediaQueryWithStyles()
         {
             // given
             string randomValue = GetRandomString();
 
-            var testStyle = new TestStyle
+            var mobileStyle = new TestStyle
             {
                 MyElement = new SharpStyle
                 {
@@ -153,14 +153,17 @@ my-custom-element {{
                 }
             };
 
-            var mediaStyle = new MediaSharpStyle
+            var mediaQuery = new MediaQuery
             {
-                SizeCondition = "max-width: 600px",
-                Styles = testStyle
+                Only = true,
+                MediaType = "screen",
+                MaxWidth = 768,
+                Styles = mobileStyle
             };
 
-            string expectedStyle = @$"
-@media(max-width: 600px){{
+            string expectedCss = @$"
+@media only screen and (max-width: 768px) {{
+
 
 my-element {{
 	background-color: {randomValue};
@@ -182,11 +185,12 @@ my-element {{
 ";
 
             // when
-            string actualStyle = mediaStyle.ToCss();
+            string actualCss = mediaQuery.ToCss();
 
             // then
-            actualStyle.Should().BeEquivalentTo(expectedStyle);
+            actualCss.Should().BeEquivalentTo(expectedCss);
         }
+
 
         internal class TestStyle : SharpStyle
         {
