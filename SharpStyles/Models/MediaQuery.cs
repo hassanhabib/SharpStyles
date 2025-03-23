@@ -71,7 +71,7 @@ namespace SharpStyles.Models
                 conditions.Add($"(max-width: {MaxWidth}px)");
 
             if (!string.IsNullOrWhiteSpace(CustomFeature))
-                conditions.Add(CustomFeature);
+                conditions.Add($"({CustomFeature.Trim('(').Trim(')')})");
 
             if (conditions.Count > 0)
             {
