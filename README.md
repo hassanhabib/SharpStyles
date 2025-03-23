@@ -106,8 +106,58 @@ my-custom-td {
 }
 ```
 
+### Media Query Support
+SharpStyles also supports building **CSS media queries** using C# — allowing you to write responsive styles in a testable, fluent format.
 
-here's a video introduction to this library:
+**Example Usage**
+
+```csharp
+var mediaQuery = new MediaQuery
+{
+    Only = true,
+    MediaType = "screen",
+    MaxWidth = 768,
+    Styles = new SharpStyle
+    {
+        BackgroundColor = "red"
+    }
+};
+
+string css = mediaQuery.ToCss();
+```
+This generates the following CSS:
+
+```css
+@media only screen and (max-width: 768px) {
+	background-color: red;
+}
+```
+You can also use additional features like min-width, not, or custom conditions such as orientation:
+
+```csharp
+var mediaQuery = new MediaQuery
+{
+    MediaType = "screen",
+    MinWidth = 600,
+    MaxWidth = 1024,
+    CustomFeature = "(orientation: landscape)",
+    Styles = new SharpStyle
+    {
+        Color = "blue"
+    }
+};
+
+```
+Which generates the following CSS:
+```css
+@media screen and (min-width: 600px) and (max-width: 1024px) and (orientation: landscape) {
+  color: blue;
+}
+```
+
+## Follow-up
+
+Here's a video introduction to this library:
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/06chSzVeuls/0.jpg)](https://www.youtube.com/watch?v=06chSzVeuls)
 
