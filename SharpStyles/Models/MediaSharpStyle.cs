@@ -24,8 +24,7 @@ namespace SharpStyles.Models
         {
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine();
-
-            stringBuilder.AppendLine($"@media({SizeCondition}){{");
+            stringBuilder.Append($"@media({SizeCondition}){{");
             stringBuilder.AppendLine(Styles?.ToCss());
             stringBuilder.AppendLine("}");
 

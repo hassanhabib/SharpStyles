@@ -124,6 +124,70 @@ my-custom-element {{
             actualStyle.Should().BeEquivalentTo(expectedStyle);
         }
 
+        [Fact]
+        public void ShouldSerializeMediaCssRules()
+        {
+            // given
+            string randomValue = GetRandomString();
+
+            var testStyle = new TestStyle
+            {
+                MyElement = new SharpStyle
+                {
+                    BackgroundColor = randomValue
+                },
+
+                MyId = new SharpStyle
+                {
+                    BackgroundColor = randomValue
+                },
+
+                MyClass = new SharpStyle
+                {
+                    BackgroundColor = randomValue
+                },
+
+                MyDeep = new SharpStyle
+                {
+                    BackgroundColor = randomValue
+                }
+            };
+
+            var mediaStyle = new MediaSharpStyle
+            {
+                SizeCondition = "max-width: 600px",
+                Styles = testStyle
+            };
+
+            string expectedStyle = @$"
+@media(max-width: 600px){{
+
+my-element {{
+	background-color: {randomValue};
+}}
+
+#my-id {{
+	background-color: {randomValue};
+}}
+
+.my-class {{
+	background-color: {randomValue};
+}}
+
+::deep my-deep {{
+	background-color: {randomValue};
+}}
+
+}}
+";
+
+            // when
+            string actualStyle = mediaStyle.ToCss();
+
+            // then
+            actualStyle.Should().BeEquivalentTo(expectedStyle);
+        }
+
         internal class TestStyle : SharpStyle
         {
             [CssElement]
