@@ -1,6 +1,6 @@
 ﻿SharpStyles - .NET Core Library
 
-Copyright (c) 2020 Hassan Habib All rights reserved.
+Copyright (c) 2025 Hassan Habib All rights reserved.
 
 Material in this repository is made available under the following terms:
   1. Code is licensed under the MIT license, reproduced below.
