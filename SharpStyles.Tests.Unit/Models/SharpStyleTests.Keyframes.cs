@@ -60,5 +60,99 @@ namespace SharpStyles.Tests.Unit.Models
             actualCss.Should().BeEquivalentTo(expectedCss);
         }
 
+        [Fact]
+        public void ShouldSerializeMultipleFramePoints()
+        {
+            // given
+            var keyframes = new SharpKeyframes
+            {
+                Name = "pulse",
+
+                Keyframes = new List<SharpKeyframe>
+                {
+                    new SharpKeyframe()
+                    {
+                        Selector = "0%",
+
+                        Properties = new()
+                        {
+                            new SharpKeyframeProperty()
+                            {
+                                Name = "transform",
+                                Value = "scale(1)"
+                            },
+
+                            new SharpKeyframeProperty()
+                            {
+                                Name = "opacity",
+                                Value = "1"
+                            }
+                        }
+                    },
+
+                    new SharpKeyframe()
+                    {
+                        Selector = "50%",
+
+                        Properties = new()
+                        {
+                            new SharpKeyframeProperty()
+                            {
+                                Name = "transform",
+                                Value = "scale(1.1)"
+                            },
+
+                            new SharpKeyframeProperty()
+                            {
+                                Name = "opacity",
+                                Value = "0.7"
+                            }
+                        }
+                    },
+
+                    new SharpKeyframe()
+                    {
+                        Selector = "100%",
+
+                        Properties = new()
+                        {
+                            new SharpKeyframeProperty()
+                            {
+                                Name = "transform",
+                                Value = "scale(1)"
+                            },
+
+                            new SharpKeyframeProperty()
+                            {
+                                Name = "opacity",
+                                Value = "1"
+                            }
+                        }
+                    }
+                }
+            };
+
+            string expectedCss = @"@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+";
+
+            // when
+            string actualCss = keyframes.ToCss();
+
+            // then
+            actualCss.Should().BeEquivalentTo(expectedCss);
+        }
     }
 }
