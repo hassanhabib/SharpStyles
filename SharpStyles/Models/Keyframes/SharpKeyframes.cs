@@ -17,6 +17,11 @@ namespace SharpStyles.Models.Keyframes
 
         public string ToCss()
         {
+            if (string.IsNullOrEmpty(Name))
+            {
+                return string.Empty;
+            }
+
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine($"@keyframes {Name} {{");
 
