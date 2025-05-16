@@ -155,6 +155,164 @@ Which generates the following CSS:
 }
 ```
 
+### Support of Keyframes 
+
+#### Highlights
+
+- New model types:
+  - `SharpKeyframes`
+  - `SharpKeyframe`
+  - `SharpKeyframeProperty`
+- Clean, valid `@keyframes` CSS generation
+- Fully compatible with existing SharpStyles design
+- Includes edge case validation
+- Thorough unit test coverage
+
+---
+
+#### Example 1: Fade In Animation
+
+```csharp
+var keyframes = new SharpKeyframes
+{
+    Name = "fadeIn",
+
+    Keyframes = new List<SharpKeyframe>
+    {
+        new SharpKeyframe()
+        {
+            Selector = "from",
+
+            Properties = new List<SharpKeyframeProperty>()
+            {
+                new SharpKeyframeProperty()
+                {
+                    Name = "opacity",
+                    Value = "0"
+                }
+            }
+        },
+        new SharpKeyframe()
+        {
+            Selector = "to",
+
+            Properties = new List<SharpKeyframeProperty>()
+            {
+                new SharpKeyframeProperty()
+                {
+                    Name = "opacity",
+                    Value = "1"
+                }
+            }
+        }
+    }
+};
+
+string css = keyframes.ToCss();
+```
+
+#### Generates:
+
+```css
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+```
+
+---
+
+#### Example 2: Pulse Animation
+
+```csharp
+var keyframes = new SharpKeyframes
+{
+    Name = "pulse",
+
+    Keyframes = new List<SharpKeyframe>
+    {
+        new SharpKeyframe()
+        {
+            Selector = "0%",
+
+            Properties = new List<SharpKeyframeProperty>()
+            {
+                new SharpKeyframeProperty()
+                {
+                    Name = "transform",
+                    Value = "scale(1)"
+                },
+                new SharpKeyframeProperty()
+                {
+                    Name = "opacity",
+                    Value = "1"
+                }
+            }
+        },
+        new SharpKeyframe()
+        {
+            Selector = "50%",
+
+            Properties = new List<SharpKeyframeProperty>()
+            {
+                new SharpKeyframeProperty()
+                {
+                    Name = "transform",
+                    Value = "scale(1.1)"
+                },
+                new SharpKeyframeProperty()
+                {
+                    Name = "opacity",
+                    Value = "0.7"
+                }
+            }
+        },
+        new SharpKeyframe()
+        {
+            Selector = "100%",
+
+            Properties = new List<SharpKeyframeProperty>()
+            {
+                new SharpKeyframeProperty()
+                {
+                    Name = "transform",
+                    Value = "scale(1)"
+                },
+                new SharpKeyframeProperty()
+                {
+                    Name = "opacity",
+                    Value = "1"
+                }
+            }
+        }
+    }
+};
+```
+
+#### Generates:
+
+```css
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+```
+
+
 ## Follow-up
 
 Here's a video introduction to this library:
