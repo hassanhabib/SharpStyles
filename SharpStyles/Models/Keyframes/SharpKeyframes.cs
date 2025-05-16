@@ -17,7 +17,8 @@ namespace SharpStyles.Models.Keyframes
 
         public string ToCss()
         {
-            if (string.IsNullOrEmpty(Name))
+            if (string.IsNullOrEmpty(Name)
+                || Keyframes is null)
             {
                 return string.Empty;
             }
