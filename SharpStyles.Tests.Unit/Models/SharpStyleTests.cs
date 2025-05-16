@@ -12,7 +12,7 @@ using Xunit;
 
 namespace SharpStyles.Tests.Unit.Models
 {
-    public class SharpStyleTests
+    public partial class SharpStyleTests
     {
         [Fact]
         public void ShouldSerializeCssRules()
