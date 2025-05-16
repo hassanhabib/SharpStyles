@@ -5,6 +5,7 @@
 // ---------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Text;
 
 namespace SharpStyles.Models.Keyframes
 {
@@ -16,7 +17,21 @@ namespace SharpStyles.Models.Keyframes
 
         public string ToCss()
         {
-            return string.Empty;
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine($"@keyframes {Name} {{");
+
+            foreach (var keyframe in Keyframes)
+            {
+                stringBuilder.AppendLine($"  {keyframe.Selector} {{");
+                foreach (var prop in keyframe.Properties)
+                {
+                    stringBuilder.AppendLine($"    {prop.Name}: {prop.Value};");
+                }
+                stringBuilder.AppendLine("  }");
+            }
+
+            stringBuilder.AppendLine("}");
+            return stringBuilder.ToString();
         }
     }
 }
