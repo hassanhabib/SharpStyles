@@ -205,5 +205,21 @@ namespace SharpStyles.Tests.Unit.Models
             css.Should().BeEmpty();
         }
 
+        [Fact]
+        public void ShouldReturnEmptyCssWhenKeyframesListIsEmpty()
+        {
+            // given
+            var keyframes = new SharpKeyframes
+            {
+                Name = "fadeIn",
+                Keyframes = new List<SharpKeyframe>()
+            };
+
+            // when
+            string css = keyframes.ToCss();
+
+            // then
+            css.Should().BeEmpty();
+        }
     }
 }
