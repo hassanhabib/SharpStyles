@@ -154,5 +154,38 @@ namespace SharpStyles.Tests.Unit.Models
             // then
             actualCss.Should().BeEquivalentTo(expectedCss);
         }
+
+        [Fact]
+        public void ShouldReturnEmptyCssWhenNameIsNull()
+        {
+            // given
+            var keyframes = new SharpKeyframes
+            {
+                Name = null,
+
+                Keyframes = new List<SharpKeyframe>
+                {
+                    new SharpKeyframe()
+                    {
+                        Selector = "from",
+
+                        Properties = new List<SharpKeyframeProperty>()
+                        {
+                            new SharpKeyframeProperty()
+                            {
+                                Name = "opacity",
+                                Value = "0"
+                            }
+                        }
+                    }
+                }
+            };
+
+            // when
+            string css = keyframes.ToCss();
+
+            // then
+            css.Should().BeEmpty();
+        }
     }
 }
