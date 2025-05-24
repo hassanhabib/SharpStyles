@@ -7,6 +7,7 @@
 using System.Collections.Generic;
 using FluentAssertions;
 using SharpStyles.Models;
+using SharpStyles.Models.Keyframes;
 using SharpStyles.Models.Queries;
 using SharpStyles.Services.Styles;
 using Xunit;
@@ -172,6 +173,114 @@ my-element {{
 	background-color: {randomSmallDeviceValue};
 }}
 
+}}
+
+";
+
+            // when
+            IStyleService styleService = new StyleService();
+
+            string actualStyle = styleService.ToCss(
+                sharpStyle: testStyle);
+
+            // then
+            actualStyle.Should().BeEquivalentTo(expectedStyle);
+        }
+
+        [Fact]
+        public void ShouldSerializeSharpStyleWithKeyFramesToCssRules()
+        {
+            // given
+            string randomValue = GetRandomString();
+            string randomSmallDeviceValue = GetRandomString();
+
+            var keyframes = new SharpKeyframes
+            {
+                Name = "fadeIn",
+
+                Keyframes = new List<SharpKeyframe>
+                {
+                    new SharpKeyframe()
+                    {
+                        Selector = "from",
+                        Properties = new List<SharpKeyframeProperty>()
+                        {
+                            new SharpKeyframeProperty()
+                            {
+                                Name = "opacity",
+                                Value = "0"
+                            }
+                        }
+                    },
+
+                    new SharpKeyframe()
+                    {
+                        Selector = "to",
+                        Properties = new()
+                        {
+                            new SharpKeyframeProperty()
+                            {
+                                Name = "opacity",
+                                Value = randomValue
+                            }
+                        }
+                    }
+                }
+            };
+
+            var testStyle = new TestStyle
+            {
+                MyElement = new SharpStyle
+                {
+                    BackgroundColor = randomValue
+                },
+
+                MyId = new SharpStyle
+                {
+                    BackgroundColor = randomValue
+                },
+
+                MyClass = new SharpStyle
+                {
+                    BackgroundColor = randomValue
+                },
+
+                MyDeep = new SharpStyle
+                {
+                    BackgroundColor = randomValue
+                },
+
+                Keyframes = new List<SharpKeyframes>
+                {
+                    keyframes
+                }
+            };
+
+            string expectedStyle = @$"
+
+my-element {{
+	background-color: {randomValue};
+}}
+
+#my-id {{
+	background-color: {randomValue};
+}}
+
+.my-class {{
+	background-color: {randomValue};
+}}
+
+::deep my-deep {{
+	background-color: {randomValue};
+}}
+
+@keyframes fadeIn {{
+  from {{
+    opacity: 0;
+  }}
+  to {{
+    opacity: {randomValue};
+  }}
 }}
 
 ";

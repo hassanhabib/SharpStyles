@@ -32,8 +32,8 @@ namespace SharpStyles.Services.Styles
                             property.PropertyType.GetGenericArguments()[0] == typeof(MediaQuery))
                 {
                     AppendMediaQueryBlock(sharpStyle, property, stringBuilder);
+                    continue;
                 }
-
             }
 
             return stringBuilder.ToString();

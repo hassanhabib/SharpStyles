@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using SharpStyles.Models;
 using SharpStyles.Models.Attributes;
+using SharpStyles.Models.Keyframes;
 using SharpStyles.Models.Queries;
 
 namespace SharpStyles.Services.Styles
@@ -95,5 +96,22 @@ namespace SharpStyles.Services.Styles
             }
         }
 
+        private void AppendKeyframesBlock(
+            SharpStyle sharpStyle,
+            PropertyInfo property,
+            StringBuilder stringBuilder)
+        {
+            IEnumerable<SharpKeyframes> sharpKeyframes =
+                property.GetValue(sharpStyle)
+                    as IEnumerable<SharpKeyframes>;
+
+            if (sharpKeyframes == null)
+                return;
+
+            foreach (var keyframes in sharpKeyframes)
+            {
+                stringBuilder.AppendLine(ToKeyframesCss(keyframes));
+            }
+        }
     }
 }
