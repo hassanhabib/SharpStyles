@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using SharpStyles.Models;
+using SharpStyles.Models.Keyframes;
 using SharpStyles.Models.Queries;
 
 namespace SharpStyles.Services.Styles
@@ -33,6 +34,13 @@ namespace SharpStyles.Services.Styles
                 {
                     AppendMediaQueryBlock(sharpStyle, property, stringBuilder);
                     continue;
+                }
+
+                if (property.PropertyType.IsGenericType &&
+                        property.PropertyType.GetGenericTypeDefinition() == typeof(List<>) &&
+                            property.PropertyType.GetGenericArguments()[0] == typeof(SharpKeyframes))
+                {
+                    AppendKeyframesBlock(sharpStyle, property, stringBuilder);
                 }
             }
 
