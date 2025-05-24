@@ -7,6 +7,7 @@
 using FluentAssertions;
 using SharpStyles.Models;
 using SharpStyles.Models.Attributes;
+using SharpStyles.Models.Queries;
 using Tynamix.ObjectFiller;
 using Xunit;
 

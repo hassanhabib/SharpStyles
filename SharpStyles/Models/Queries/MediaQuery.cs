@@ -7,7 +7,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SharpStyles.Models
+namespace SharpStyles.Models.Queries
 {
     public class MediaQuery
     {
