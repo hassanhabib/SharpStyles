@@ -4,12 +4,14 @@
 // See License.txt in the project root for license information.
 // ---------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using SharpStyles.Models;
 using SharpStyles.Models.Attributes;
+using SharpStyles.Models.Queries;
 
 namespace SharpStyles.Services.Styles
 {
@@ -17,22 +19,6 @@ namespace SharpStyles.Services.Styles
     {
         private static readonly Regex PascalToKebabRegex =
             new Regex("([a-z,0-9](?=[A-Z])|[A-Z](?=[A-Z][a-z]))");
-
-        public string ToCss(SharpStyle sharpStyle)
-        {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine();
-
-            foreach (PropertyInfo property in sharpStyle.GetType().GetProperties())
-            {
-                if (property.PropertyType.IsEquivalentTo(typeof(SharpStyle)))
-                {
-                    AppendStyleBlock(sharpStyle, property, stringBuilder);
-                }
-            }
-
-            return stringBuilder.ToString();
-        }
 
         private static void AppendStyleBlock(
             SharpStyle sharpStyle,
@@ -90,5 +76,24 @@ namespace SharpStyles.Services.Styles
                 }
             }
         }
+
+        private void AppendMediaQueryBlock(
+            SharpStyle sharpStyle,
+            PropertyInfo property,
+            StringBuilder stringBuilder)
+        {
+            IEnumerable<MediaQuery> mediaQueries =
+                property.GetValue(sharpStyle)
+                    as IEnumerable<MediaQuery>;
+
+            if (mediaQueries == null)
+                return;
+
+            foreach (var mediaQuery in mediaQueries)
+            {
+                stringBuilder.AppendLine(ToQueryCss(mediaQuery));
+            }
+        }
+
     }
 }

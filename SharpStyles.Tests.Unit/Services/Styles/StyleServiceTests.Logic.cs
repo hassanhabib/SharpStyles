@@ -99,7 +99,7 @@ my-element {{
 
                 MyDeep = new SharpStyle
                 {
-                    BackgroundColor = randomValue
+                    BackgroundColor = randomSmallDeviceValue
                 }
             };
 
@@ -153,7 +153,8 @@ my-element {{
 	background-color: {randomValue};
 }}
 
-@media (min-width: 768px) {{
+@media (max-width: 768px) {{
+
 
 my-element {{
 	background-color: {randomSmallDeviceValue};
@@ -172,6 +173,7 @@ my-element {{
 }}
 
 }}
+
 ";
 
             // when
