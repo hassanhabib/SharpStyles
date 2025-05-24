@@ -4,10 +4,11 @@
 // See License.txt in the project root for license information.
 // ---------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SharpStyles.Models
+namespace SharpStyles.Models.Queries
 {
     public class MediaQuery
     {
@@ -46,6 +47,8 @@ namespace SharpStyles.Models
         /// </summary>
         public SharpStyle Styles { get; set; }
 
+        [Obsolete("ToCss is obsolete and only supports legacy nested style serialization." +
+           " Use ToQueryCss() extension method instead.")]
         public string ToCss()
         {
             var sb = new StringBuilder();

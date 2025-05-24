@@ -4,19 +4,20 @@
 // See License.txt in the project root for license information.
 // ---------------------------------------------------------------
 
+using System.Collections.Generic;
 using FluentAssertions;
 using SharpStyles.Models;
-using SharpStyles.Models.Attributes;
+using SharpStyles.Models.Keyframes;
 using SharpStyles.Models.Queries;
-using Tynamix.ObjectFiller;
+using SharpStyles.Services.Styles;
 using Xunit;
 
-namespace SharpStyles.Tests.Unit.Models
+namespace SharpStyles.Tests.Unit.Services.Styles
 {
-    public partial class SharpStyleTests
+    public partial class StyleServiceTests
     {
         [Fact]
-        public void ShouldSerializeCssRules()
+        public void ShouldSerializeSharpStyleToCssRules()
         {
             // given
             string randomValue = GetRandomString();
@@ -64,19 +65,46 @@ my-element {{
 ";
 
             // when
-            string actualStyle = testStyle.ToCss();
+            IStyleService styleService = new StyleService();
+
+            string actualStyle = styleService.ToStyleCss(
+                sharpStyle: testStyle);
 
             // then
             actualStyle.Should().BeEquivalentTo(expectedStyle);
         }
 
         [Fact]
-        public void ShouldSerializeWithCustomSelectors()
+        public void ShouldSerializeSharpStyleWithMediaQueriesToCssRules()
         {
             // given
             string randomValue = GetRandomString();
+            string randomSmallDeviceValue = GetRandomString();
 
-            var testStyle = new TestStyleWithCustomSelectors
+            var smallScreenStyle = new TestStyle
+            {
+                MyElement = new SharpStyle
+                {
+                    BackgroundColor = randomSmallDeviceValue
+                },
+
+                MyId = new SharpStyle
+                {
+                    BackgroundColor = randomSmallDeviceValue
+                },
+
+                MyClass = new SharpStyle
+                {
+                    BackgroundColor = randomSmallDeviceValue
+                },
+
+                MyDeep = new SharpStyle
+                {
+                    BackgroundColor = randomSmallDeviceValue
+                }
+            };
+
+            var testStyle = new TestStyle
             {
                 MyElement = new SharpStyle
                 {
@@ -96,42 +124,111 @@ my-element {{
                 MyDeep = new SharpStyle
                 {
                     BackgroundColor = randomValue
+                },
+
+                MediaQueries = new List<MediaQuery>
+                {
+                    new MediaQuery
+                    {
+                        MaxWidth  = 768,
+                        Styles = smallScreenStyle
+                    }
                 }
             };
 
             string expectedStyle = @$"
 
-my-custom-element {{
+my-element {{
 	background-color: {randomValue};
 }}
 
-#my-custom-id {{
+#my-id {{
 	background-color: {randomValue};
 }}
 
-.my-custom-class {{
+.my-class {{
 	background-color: {randomValue};
 }}
 
-::my-custom-deep {{
+::deep my-deep {{
 	background-color: {randomValue};
 }}
+
+@media (max-width: 768px) {{
+
+
+my-element {{
+	background-color: {randomSmallDeviceValue};
+}}
+
+#my-id {{
+	background-color: {randomSmallDeviceValue};
+}}
+
+.my-class {{
+	background-color: {randomSmallDeviceValue};
+}}
+
+::deep my-deep {{
+	background-color: {randomSmallDeviceValue};
+}}
+
+}}
+
 ";
 
             // when
-            string actualStyle = testStyle.ToCss();
+            IStyleService styleService = new StyleService();
+
+            string actualStyle = styleService.ToStyleCss(
+                sharpStyle: testStyle);
 
             // then
             actualStyle.Should().BeEquivalentTo(expectedStyle);
         }
 
         [Fact]
-        public void ShouldSerializeMediaQueryWithStyles()
+        public void ShouldSerializeSharpStyleWithKeyFramesToCssRules()
         {
             // given
             string randomValue = GetRandomString();
+            string randomSmallDeviceValue = GetRandomString();
 
-            var mobileStyle = new TestStyle
+            var keyframes = new SharpKeyframes
+            {
+                Name = "fadeIn",
+
+                Keyframes = new List<SharpKeyframe>
+                {
+                    new SharpKeyframe()
+                    {
+                        Selector = "from",
+                        Properties = new List<SharpKeyframeProperty>()
+                        {
+                            new SharpKeyframeProperty()
+                            {
+                                Name = "opacity",
+                                Value = "0"
+                            }
+                        }
+                    },
+
+                    new SharpKeyframe()
+                    {
+                        Selector = "to",
+                        Properties = new()
+                        {
+                            new SharpKeyframeProperty()
+                            {
+                                Name = "opacity",
+                                Value = randomValue
+                            }
+                        }
+                    }
+                }
+            };
+
+            var testStyle = new TestStyle
             {
                 MyElement = new SharpStyle
                 {
@@ -151,20 +248,15 @@ my-custom-element {{
                 MyDeep = new SharpStyle
                 {
                     BackgroundColor = randomValue
+                },
+
+                Keyframes = new List<SharpKeyframes>
+                {
+                    keyframes
                 }
             };
 
-            var mediaQuery = new MediaQuery
-            {
-                Only = true,
-                MediaType = "screen",
-                MaxWidth = 768,
-                Styles = mobileStyle
-            };
-
-            string expectedCss = @$"
-@media only screen and (max-width: 768px) {{
-
+            string expectedStyle = @$"
 
 my-element {{
 	background-color: {randomValue};
@@ -182,116 +274,25 @@ my-element {{
 	background-color: {randomValue};
 }}
 
+@keyframes fadeIn {{
+  from {{
+    opacity: 0;
+  }}
+  to {{
+    opacity: {randomValue};
+  }}
 }}
+
 ";
 
             // when
-            string actualCss = mediaQuery.ToCss();
+            IStyleService styleService = new StyleService();
+
+            string actualStyle = styleService.ToStyleCss(
+                sharpStyle: testStyle);
 
             // then
-            actualCss.Should().BeEquivalentTo(expectedCss);
+            actualStyle.Should().BeEquivalentTo(expectedStyle);
         }
-
-        [Fact]
-        public void ShouldSerializeMediaQueryWithCustomCondition()
-        {
-            // given
-            string randomValue = GetRandomString();
-
-            var mobileStyle = new TestStyle
-            {
-                MyElement = new SharpStyle
-                {
-                    BackgroundColor = randomValue
-                },
-
-                MyId = new SharpStyle
-                {
-                    BackgroundColor = randomValue
-                },
-
-                MyClass = new SharpStyle
-                {
-                    BackgroundColor = randomValue
-                },
-
-                MyDeep = new SharpStyle
-                {
-                    BackgroundColor = randomValue
-                }
-            };
-
-            var mediaQuery = new MediaQuery
-            {
-                Only = true,
-                MediaType = "screen",
-                MaxWidth = 768,
-                Styles = mobileStyle,
-                CustomFeature = "orientation: portrait"
-            };
-
-            string expectedCss = @$"
-@media only screen and (max-width: 768px) and (orientation: portrait) {{
-
-
-my-element {{
-	background-color: {randomValue};
-}}
-
-#my-id {{
-	background-color: {randomValue};
-}}
-
-.my-class {{
-	background-color: {randomValue};
-}}
-
-::deep my-deep {{
-	background-color: {randomValue};
-}}
-
-}}
-";
-
-            // when
-            string actualCss = mediaQuery.ToCss();
-
-            // then
-            actualCss.Should().BeEquivalentTo(expectedCss);
-        }
-
-
-        internal class TestStyle : SharpStyle
-        {
-            [CssElement]
-            public SharpStyle MyElement { get; set; }
-
-            [CssId]
-            public SharpStyle MyId { get; set; }
-
-            [CssClass]
-            public SharpStyle MyClass { get; set; }
-
-            [CssDeep]
-            public SharpStyle MyDeep { get; set; }
-        }
-
-        internal class TestStyleWithCustomSelectors : SharpStyle
-        {
-            [CssElement(Selector = "my-custom-element")]
-            public SharpStyle MyElement { get; set; }
-
-            [CssId(Selector = "#my-custom-id")]
-            public SharpStyle MyId { get; set; }
-
-            [CssClass(Selector = ".my-custom-class")]
-            public SharpStyle MyClass { get; set; }
-
-            [CssDeep(Selector = "::my-custom-deep")]
-            public SharpStyle MyDeep { get; set; }
-        }
-
-        private static string GetRandomString() =>
-            new MnemonicString().GetValue();
     }
 }

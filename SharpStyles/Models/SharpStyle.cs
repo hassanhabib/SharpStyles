@@ -4,11 +4,15 @@
 // See License.txt in the project root for license information.
 // ---------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using SharpStyles.Models.Attributes;
+using SharpStyles.Models.Keyframes;
+using SharpStyles.Models.Queries;
 
 namespace SharpStyles.Models
 {
@@ -869,6 +873,20 @@ namespace SharpStyles.Models
         /// </summary>
         public string PointerEvents { get; set; }
 
+        /// <summary>
+        /// Specifies a collection of keyframe animations associated with this style.
+        /// Each <see cref="SharpKeyframes"/> defines a named set of keyframes for use in CSS animations.
+        /// </summary>
+        public List<SharpKeyframes> Keyframes { get; set; }
+
+        /// <summary>
+        /// Specifies a collection of media queries that apply conditional styles based 
+        /// on device characteristics such as screen size, orientation, or other media features.
+        /// </summary>
+        public List<MediaQuery> MediaQueries { get; set; }
+
+        [Obsolete("ToCss is obsolete and only supports legacy nested style serialization." +
+            " Use ToStyleCss() extension method instead.")]
         public string ToCss()
         {
             var reg = new Regex("([a-z,0-9](?=[A-Z])|[A-Z](?=[A-Z][a-z]))");

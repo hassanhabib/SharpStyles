@@ -43,4 +43,9 @@
 	  </None>
 	</ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="SharpStyles.Tests.Unit" />
+		<InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+	</ItemGroup>
+
 </Project>

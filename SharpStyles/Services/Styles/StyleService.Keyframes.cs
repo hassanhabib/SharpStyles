@@ -4,33 +4,27 @@
 // See License.txt in the project root for license information.
 // ---------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
 using System.Text;
+using SharpStyles.Models.Keyframes;
 
-namespace SharpStyles.Models.Keyframes
+namespace SharpStyles.Services.Styles
 {
-    public class SharpKeyframes
+    internal partial class StyleService : IStyleService
     {
-        public string Name { get; set; }
-
-        public List<SharpKeyframe> Keyframes { get; set; }
-
-        [Obsolete("ToCss is obsolete and only supports legacy nested style serialization." +
-           " Use ToKeyframesCss() extension method instead.")]
-        public string ToCss()
+        public string ToKeyframesCss(SharpKeyframes sharpKeyframes)
         {
-            if (string.IsNullOrEmpty(Name)
-                || Keyframes is null
-                    || Keyframes.Count is 0)
+            if (string.IsNullOrEmpty(sharpKeyframes?.Name)
+                || sharpKeyframes?.Keyframes is null
+                    || sharpKeyframes?.Keyframes.Count is 0)
             {
                 return string.Empty;
             }
 
             var stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine($"@keyframes {Name} {{");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"@keyframes {sharpKeyframes.Name} {{");
 
-            foreach (var keyframe in Keyframes)
+            foreach (var keyframe in sharpKeyframes.Keyframes)
             {
                 stringBuilder.AppendLine($"  {keyframe.Selector} {{");
                 foreach (var prop in keyframe.Properties)
