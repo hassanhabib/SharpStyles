@@ -4,6 +4,7 @@
 // See License.txt in the project root for license information.
 // ---------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -15,6 +16,8 @@ namespace SharpStyles.Models.Keyframes
 
         public List<SharpKeyframe> Keyframes { get; set; }
 
+        [Obsolete("ToCss is obsolete and only supports legacy nested style serialization." +
+           " Use ToKeyframesCss() extension method instead.")]
         public string ToCss()
         {
             if (string.IsNullOrEmpty(Name)

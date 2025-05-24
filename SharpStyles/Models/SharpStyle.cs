@@ -885,7 +885,8 @@ namespace SharpStyles.Models
         /// </summary>
         public List<MediaQuery> MediaQueries { get; set; }
 
-        [Obsolete("ToCss is obsolete and only supports legacy nested style serialization. Use the new CSS generation APIs instead.")]
+        [Obsolete("ToCss is obsolete and only supports legacy nested style serialization." +
+            " Use ToStyleCss() extension method instead.")]
         public string ToCss()
         {
             var reg = new Regex("([a-z,0-9](?=[A-Z])|[A-Z](?=[A-Z][a-z]))");

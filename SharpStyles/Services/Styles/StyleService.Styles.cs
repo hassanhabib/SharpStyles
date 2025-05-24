@@ -15,7 +15,7 @@ namespace SharpStyles.Services.Styles
 {
     internal partial class StyleService : IStyleService
     {
-        public string ToCss(SharpStyle sharpStyle)
+        public string ToStyleCss(SharpStyle sharpStyle)
         {
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine();

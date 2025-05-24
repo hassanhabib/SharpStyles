@@ -5,13 +5,15 @@
 // ---------------------------------------------------------------
 
 using SharpStyles.Models;
+using SharpStyles.Models.Keyframes;
 using SharpStyles.Models.Queries;
 
 namespace SharpStyles.Services.Styles
 {
     internal interface IStyleService
     {
-        string ToCss(SharpStyle sharpStyle);
+        string ToStyleCss(SharpStyle sharpStyle);
         string ToQueryCss(MediaQuery mediaQuery);
+        string ToKeyframesCss(SharpKeyframes sharpKeyframes);
     }
 }

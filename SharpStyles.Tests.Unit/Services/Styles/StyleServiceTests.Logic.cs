@@ -67,7 +67,7 @@ my-element {{
             // when
             IStyleService styleService = new StyleService();
 
-            string actualStyle = styleService.ToCss(
+            string actualStyle = styleService.ToStyleCss(
                 sharpStyle: testStyle);
 
             // then
@@ -180,7 +180,7 @@ my-element {{
             // when
             IStyleService styleService = new StyleService();
 
-            string actualStyle = styleService.ToCss(
+            string actualStyle = styleService.ToStyleCss(
                 sharpStyle: testStyle);
 
             // then
@@ -288,7 +288,7 @@ my-element {{
             // when
             IStyleService styleService = new StyleService();
 
-            string actualStyle = styleService.ToCss(
+            string actualStyle = styleService.ToStyleCss(
                 sharpStyle: testStyle);
 
             // then

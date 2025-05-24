@@ -47,7 +47,7 @@ namespace SharpStyles.Services.Styles
             }
 
             stringBuilder.AppendLine(" {");
-            stringBuilder.AppendLine(ToCss(mediaQuery.Styles) ?? string.Empty);
+            stringBuilder.AppendLine(ToStyleCss(mediaQuery.Styles) ?? string.Empty);
             stringBuilder.AppendLine("}");
 
             return stringBuilder.ToString();
