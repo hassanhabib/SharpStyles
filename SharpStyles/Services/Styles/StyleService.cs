@@ -29,11 +29,12 @@ namespace SharpStyles.Services.Styles
             string prefix = null;
             string selectorCss = null;
 
-            foreach (var attribute in property.CustomAttributes)
+            foreach (CustomAttributeData attribute in property.CustomAttributes)
             {
                 if (attribute.NamedArguments.Any())
                 {
-                    selectorCss = attribute.NamedArguments[0].TypedValue.Value.ToString();
+                    selectorCss =
+                        attribute.NamedArguments[0].TypedValue.Value.ToString();
                 }
                 else
                 {
@@ -51,9 +52,7 @@ namespace SharpStyles.Services.Styles
             stringBuilder.AppendLine();
             stringBuilder.Append($"{prefix}{selectorCss} {{");
             stringBuilder.AppendLine();
-
             AppendInnerStyles(sharpStyle, property, stringBuilder);
-
             stringBuilder.Append("}");
             stringBuilder.AppendLine();
         }
@@ -63,8 +62,8 @@ namespace SharpStyles.Services.Styles
             PropertyInfo property,
             StringBuilder stringBuilder)
         {
-            var styleValue = property.GetValue(sharpStyle);
-            if (styleValue == null) return;
+            object styleValue = property.GetValue(sharpStyle);
+            if (styleValue is null) return;
 
             foreach (PropertyInfo innerProperty in property.PropertyType.GetProperties())
             {
@@ -87,12 +86,13 @@ namespace SharpStyles.Services.Styles
                 property.GetValue(sharpStyle)
                     as IEnumerable<MediaQuery>;
 
-            if (mediaQueries == null)
+            if (mediaQueries is null)
                 return;
 
-            foreach (var mediaQuery in mediaQueries)
+            foreach (MediaQuery mediaQuery in mediaQueries)
             {
-                stringBuilder.AppendLine(ToQueryCss(mediaQuery));
+                stringBuilder.AppendLine(
+                    value: ToQueryCss(mediaQuery));
             }
         }
 
@@ -108,9 +108,10 @@ namespace SharpStyles.Services.Styles
             if (sharpKeyframes == null)
                 return;
 
-            foreach (var keyframes in sharpKeyframes)
+            foreach (SharpKeyframes keyframes in sharpKeyframes)
             {
-                stringBuilder.AppendLine(ToKeyframesCss(keyframes));
+                stringBuilder.AppendLine(
+                    value: ToKeyframesCss(keyframes));
             }
         }
     }
