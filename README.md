@@ -1,7 +1,5 @@
 ﻿
-<p align="center">
-  <img width="25%" height="25%" src="https://raw.githubusercontent.com/hassanhabib/SharpStyles/master/SharpStyles/Resources/SharpStyles.png">
-</p>
+![SharpStyles](https://raw.githubusercontent.com/hassanhabib/SharpStyles/master/SharpStyles/Resources/SharpStylesHeader.png)
 
 [![.NET](https://github.com/hassanhabib/SharpStyles/actions/workflows/dotnet.yml/badge.svg)](https://github.com/hassanhabib/SharpStyles/actions/workflows/dotnet.yml)
 [![Nuget](https://img.shields.io/nuget/v/SharpStyles)](https://www.nuget.org/packages/SharpStyles/)

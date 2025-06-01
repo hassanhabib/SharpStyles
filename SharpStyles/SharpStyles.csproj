@@ -13,9 +13,9 @@
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageIcon>SharpStyles.png</PackageIcon>
 		<PackageIconUrl />
-		<Version>1.0</Version>
-		<AssemblyVersion>1.0.0.0</AssemblyVersion>
-		<FileVersion>1.0.0.0</FileVersion>
+		<Version>1.0.1</Version>
+		<AssemblyVersion>1.0.1.0</AssemblyVersion>
+		<FileVersion>1.0.1.0</FileVersion>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<PackageLicenseExpression></PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/hassanhabib/SharpStyles</PackageProjectUrl>
@@ -23,10 +23,15 @@
 		<RepositoryUrl>https://github.com/hassanhabib/SharpStyles</RepositoryUrl>
 		<RepositoryType>Github</RepositoryType>
 		<PackageTags>CSS Styles .NET</PackageTags>
-		<PackageReleaseNotes>Adding new Style Extensions: ToStyleCss(), ToQueryCss() and ToKeyframesCss()</PackageReleaseNotes>
+		<PackageReleaseNotes>Fixes serialization issues</PackageReleaseNotes>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Include="..\README.md">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+		</None>
 		<None Include="License.txt">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
