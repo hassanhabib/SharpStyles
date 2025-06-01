@@ -294,5 +294,65 @@ my-element {{
             // then
             actualStyle.Should().BeEquivalentTo(expectedStyle);
         }
+
+        [Theory]
+        [InlineData("#ff0000")]
+        [InlineData("#00FF00")]
+        [InlineData("#0000fF")]
+        [InlineData("#123456")]
+        public void ShouldSerializeSharpStyleToCssRulesWithUppercasedAndLowercasedHexColors(string hexColor)
+        {
+            // given
+            var testStyle = new TestStyle
+            {
+                MyElement = new SharpStyle
+                {
+                    BackgroundColor = hexColor
+                },
+
+                MyId = new SharpStyle
+                {
+                    BackgroundColor = hexColor
+                },
+
+                MyClass = new SharpStyle
+                {
+                    BackgroundColor = hexColor
+                },
+
+                MyDeep = new SharpStyle
+                {
+                    BackgroundColor = hexColor
+                }
+            };
+
+            string expectedStyle = @$"
+
+my-element {{
+	background-color: {hexColor};
+}}
+
+#my-id {{
+	background-color: {hexColor};
+}}
+
+.my-class {{
+	background-color: {hexColor};
+}}
+
+::deep my-deep {{
+	background-color: {hexColor};
+}}
+";
+
+            // when
+            IStyleService styleService = new StyleService();
+
+            string actualStyle = styleService.ToStyleCss(
+                sharpStyle: testStyle);
+
+            // then
+            actualStyle.Should().BeEquivalentTo(expectedStyle);
+        }
     }
 }

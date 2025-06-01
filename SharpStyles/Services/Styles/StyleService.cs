@@ -70,8 +70,9 @@ namespace SharpStyles.Services.Styles
                 var value = innerProperty.GetValue(styleValue);
                 if (value != null)
                 {
-                    string raw = $"\t{innerProperty.Name}: {value};";
-                    stringBuilder.Append(PascalToKebabRegex.Replace(raw, "$1-").ToLower());
+                    string formattedName = PascalToKebabRegex.Replace(innerProperty.Name, "$1-").ToLower();
+                    string raw = $"\t{formattedName}: {value};";
+                    stringBuilder.Append(raw);
                     stringBuilder.AppendLine();
                 }
             }
