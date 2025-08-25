@@ -589,6 +589,11 @@ namespace SharpStyles.Models
         public string MinWidth { get; set; }
 
         /// <summary>
+        /// Specifies how the content of a replaced element (e.g., image or video) should be resized to fit its container.
+        /// </summary>
+        public string ObjectFit { get; set; }
+
+        /// <summary>
         /// Specifies the transparency of an element.
         /// </summary>
         public string Opacity { get; set; }
