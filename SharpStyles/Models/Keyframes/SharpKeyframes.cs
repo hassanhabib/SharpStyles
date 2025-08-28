@@ -1,6 +1,6 @@
 ﻿// ---------------------------------------------------------------
-// Copyright (c) Hassan Habib
-// Licensed under the MIT License.
+// Copyright (c) Hassan Habib.
+// Licensed under the TSSL License.
 // See License.txt in the project root for license information.
 // ---------------------------------------------------------------
 

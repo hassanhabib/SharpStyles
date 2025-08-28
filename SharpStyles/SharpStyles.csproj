@@ -13,9 +13,9 @@
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageIcon>SharpStyles.png</PackageIcon>
 		<PackageIconUrl />
-		<Version>1.0.1</Version>
-		<AssemblyVersion>1.0.1.0</AssemblyVersion>
-		<FileVersion>1.0.1.0</FileVersion>
+		<Version>1.0.2</Version>
+		<AssemblyVersion>1.0.2.0</AssemblyVersion>
+		<FileVersion>1.0.2.0</FileVersion>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<PackageLicenseExpression></PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/hassanhabib/SharpStyles</PackageProjectUrl>
@@ -23,7 +23,7 @@
 		<RepositoryUrl>https://github.com/hassanhabib/SharpStyles</RepositoryUrl>
 		<RepositoryType>Github</RepositoryType>
 		<PackageTags>CSS Styles .NET</PackageTags>
-		<PackageReleaseNotes>Fixes serialization issues</PackageReleaseNotes>
+		<PackageReleaseNotes>Adds the object-fit css property and adope TSSL</PackageReleaseNotes>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
