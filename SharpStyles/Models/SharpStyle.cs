@@ -879,6 +879,11 @@ namespace SharpStyles.Models
         public string PointerEvents { get; set; }
 
         /// <summary>
+        /// Specifies whether the text of an element can be selected by the user.
+        /// </summary>
+        public string UserSelect { get; set; }
+
+        /// <summary>
         /// Specifies a collection of keyframe animations associated with this style.
         /// Each <see cref="SharpKeyframes"/> defines a named set of keyframes for use in CSS animations.
         /// </summary>
