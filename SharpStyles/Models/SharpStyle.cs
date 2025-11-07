@@ -884,6 +884,13 @@ namespace SharpStyles.Models
         public string UserSelect { get; set; }
 
         /// <summary>
+        /// Gets or sets the definition of columns in the grid layout, using CSS grid-template-columns syntax.
+        /// </summary>
+        /// <remarks>Specify column sizes and patterns as a string, such as "1fr 2fr 100px". The value
+        /// should follow standard CSS grid-template-columns formatting to control the layout of grid columns.</remarks>
+        public string GridTemplateColumns { get; set; }
+
+        /// <summary>
         /// Specifies a collection of keyframe animations associated with this style.
         /// Each <see cref="SharpKeyframes"/> defines a named set of keyframes for use in CSS animations.
         /// </summary>
