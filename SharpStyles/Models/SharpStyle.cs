@@ -891,6 +891,19 @@ namespace SharpStyles.Models
         public string GridTemplateColumns { get; set; }
 
         /// <summary>
+        /// Specifies the inset offsets of a positioned element using the CSS `inset` shorthand.
+        /// </summary>
+        /// <remarks>This is a shorthand for setting the `top`, `right`, `bottom`, and `left` offsets in a single declaration.
+        /// Accepts one to four values (lengths, percentages, or the keyword <c>auto</c>):
+        /// - one value: applies to all four sides (e.g. "10px")
+        /// - two values: vertical | horizontal (e.g. "10px 5px")
+        /// - three values: top | horizontal | bottom (e.g. "10px 5px 15px")
+        /// - four values: top | right | bottom | left (e.g. "10px 5px 15px 2px")
+        /// Use this property to conveniently set positional offsets when an element is positioned.
+        /// </remarks>
+        public string Inset { get; set; }
+
+        /// <summary>
         /// Specifies a collection of keyframe animations associated with this style.
         /// Each <see cref="SharpKeyframes"/> defines a named set of keyframes for use in CSS animations.
         /// </summary>
